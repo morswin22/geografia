@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat';
+  margin: 3em 0;
+  height: calc(100vh - 6em);
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "mapName" "map" "mapBg" "mapSave";
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 30px 500px 30px 30px;
+      grid-template-rows: 30px 500px 30px 30px;
+  grid-gap: 1em;
+}
+
+body > * {
+  margin: 0 auto;
+}
+
+#mapName {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: mapName;
+  border-bottom: 1px solid transparent;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  outline: none;
+  width: 250px;
+}
+
+.enter {
+  -webkit-animation: engreen 300ms ease-in-out forwards;
+          animation: engreen 300ms ease-in-out forwards;
+}
+
+@-webkit-keyframes engreen {
+  0% {
+    border-bottom-color: transparent;
+  }
+  30% {
+    border-bottom-color: green;
+  }
+  100% {
+    border-bottom-color: transparent;
+  }
+}
+
+@keyframes engreen {
+  0% {
+    border-bottom-color: transparent;
+  }
+  30% {
+    border-bottom-color: green;
+  }
+  100% {
+    border-bottom-color: transparent;
+  }
+}
+
+#map {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: map;
+  width: 500px;
+  height: 500px;
+  background-size: 100% 100%;
+  background-position: center center;
+  position: relative;
+}
+
+#map > div {
+  position: absolute;
+  cursor: default;
+}
+
+#map > div:hover::before {
+  opacity: 1;
+  -webkit-transform: translate(-50%) scale(1);
+          transform: translate(-50%) scale(1);
+}
+
+#map > div::before {
+  content: attr(data-content);
+  position: absolute;
+  opacity: 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.3em;
+  border-radius: 4px;
+  left: 50%;
+  top: -30px;
+  -webkit-transform: translate(-50%) scale(0);
+          transform: translate(-50%) scale(0);
+  -webkit-transition: opacity 250ms ease-in-out;
+  transition: opacity 250ms ease-in-out;
+  z-index: 9999;
+}
+
+#mapBg {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: mapBg;
+  width: 250px;
+}
+
+#mapSave {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: mapSave;
+  width: 250px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+}
+
+#mapAvaible {
+  position: absolute;
+  display: none;
+  width: 250px;
+  margin-bottom: -2px;
+  z-index: 999;
+}
+
+#mapAvaible > div {
+  border: 1px solid #ccc;
+  border-top: 0;
+  background-color: white;
+  -webkit-transition: background-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+  padding: 0.2em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+}
+
+#mapAvaible > div:hover {
+  background-color: #efefef;
+}
+
+#mapAvaible > div:first-child {
+  border-top: 1px solid #ccc;
+}
+
+#mapName.focused + #mapAvaible {
+  display: initial;
+}
+/*# sourceMappingURL=main.css.map */
