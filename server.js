@@ -55,4 +55,38 @@ app.get('/api/getAvaibleMaps', (req,res)=>{
     res.send(JSON.stringify(m));
 })
 
+app.get('/all', (req,res)=>{
+    let body = ''; let lb = "\n";
+    let data = JSON.parse(fs.readFileSync(mapsJson))
+    for (let dataset in data) {
+        let namespace = {};
+        switch(dataset) {
+            case "Europa1":
+                namespace = {
+                    s: "Stolica: ",
+                    p: "Państwo: "
+                };
+                break;
+            case "Polska1":
+                namespace = {
+                    w: "Województwo: ",
+                    s: "Stolica: ",
+                    z: "Zabytek UNESCO: ",
+                    m: "Miasto: "
+                }
+                break;
+        }
+        let elements = data[dataset].elements;
+        body += dataset + lb + lb;
+
+        for (let element of elements) {
+            body += ((namespace[element.symbol]) ? namespace[element.symbol] : element.symbol + ': ' ) + element.name + lb;
+        }
+
+        body += lb + lb;
+    }
+    res.set('Content-Type', 'text/plain');
+    res.send(body);
+});
+
 app.listen(80);
